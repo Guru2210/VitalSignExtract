@@ -1,0 +1,36 @@
+install the following using following command
+
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y build-essential cmake pkg-config libopencv-dev tesseract-ocr libtesseract
+
+To check if g++ , gcc is installed, run:
+g++ --version
+gcc --version
+
+to clean
+make clean 
+
+tto check correct commpiler
+echo $CC
+echo $CXX
+
+the answer sholud be like for above echo command 
+/usr/bin/arm-linux-gnueabihf-gcc
+/usr/bin/arm-linux-gnueabihf-g++
+
+if not the answe as mentioned to the echo command run
+export CC=/usr/bin/arm-nux-gnueabihf-gcc
+export CXX=/usr/bin/arm-linux-gnueabihf-g++
+
+i have added video file path in code change that for test video else to change camera input make 0 in the path
+VideoCapture cap(0)
+
+
+
+navigate to folder directory and run command
+if Raspberry Pi 4 (and other Armv7l Linux targets) - APP_CUSTOM=1 TARGET_LINUX_ARMV7=1 USE_FULL_TFLITE=1 make -j
+else othe devices - make
+
+ Run the Compiled Program
+./app
+
