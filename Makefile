@@ -6,8 +6,11 @@ CXX ?= g++
 NAME = app
 BUILD_PATH = ./build
 
-# Location of main.cpp (must use C++ compiler for main)
-CXXSOURCES = main.cpp
+# Location of main.cpp and new modular source files
+CXXSOURCES = main.cpp \
+			 src/config/ConfigManager.cpp \
+			 src/utils/Logger.cpp \
+			 src/database/DatabaseManager.cpp
 
 # Search path for header files (current directory)
 CFLAGS += -I.
@@ -29,6 +32,9 @@ LDFLAGS += $(shell pkg-config --libs opencv4)
 CFLAGS += $(shell pkg-config --cflags tesseract)
 LDFLAGS += $(shell pkg-config --libs tesseract)
 
+# PostgreSQL flags
+CFLAGS += $(shell pkg-config --cflags libpq)
+LDFLAGS += $(shell pkg-config --libs libpq)
 
 # Linker flags
 LDFLAGS += -lm 						# Link to math.h

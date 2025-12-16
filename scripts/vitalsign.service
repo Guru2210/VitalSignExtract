@@ -1,0 +1,29 @@
+[Unit]
+Description=Vital Sign Extraction System
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/VitalSignExtract
+ExecStart=/home/pi/VitalSignExtract/build/app /home/pi/VitalSignExtract/config/config.json
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Environment variables
+Environment="LD_LIBRARY_PATH=/usr/local/lib"
+
+# Resource limits
+LimitNOFILE=65536
+MemoryLimit=1G
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

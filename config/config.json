@@ -1,0 +1,76 @@
+{
+  "application": {
+    "name": "VitalSignExtractor",
+    "version": "1.0.0",
+    "debug_mode": false
+  },
+  "video": {
+    "source_type": "file",
+    "source_path": "/home/KK/1.mp4",
+    "camera_index": 0,
+    "frame_width": 640,
+    "frame_height": 480,
+    "processing_interval": 300,
+    "reconnect_attempts": 5,
+    "reconnect_delay_ms": 2000
+  },
+  "ocr": {
+    "language": "eng",
+    "confidence_threshold": 50,
+    "tesseract_config": "",
+    "page_segmentation_mode": 3
+  },
+  "vital_signs": {
+    "default_spo2": "81",
+    "labels": ["HR", "SpO2", "ABP"],
+    "spo2_history_size": 10,
+    "validation": {
+      "hr_min": 30,
+      "hr_max": 200,
+      "spo2_min": 70,
+      "spo2_max": 100,
+      "abp_systolic_min": 70,
+      "abp_systolic_max": 200,
+      "abp_diastolic_min": 40,
+      "abp_diastolic_max": 130
+    }
+  },
+  "ml_model": {
+    "enabled": true,
+    "input_width": 96,
+    "input_height": 96,
+    "confidence_threshold": 0.7
+  },
+  "database": {
+    "enabled": true,
+    "type": "postgresql",
+    "host": "localhost",
+    "port": 5432,
+    "database": "vital_signs_db",
+    "user": "vitalsign_user",
+    "password": "changeme",
+    "connection_pool_size": 5,
+    "connection_timeout": 30,
+    "retry_attempts": 3,
+    "retry_delay_ms": 1000
+  },
+  "output": {
+    "csv_enabled": true,
+    "csv_file": "live_vital_signs_output.csv",
+    "console_output": true
+  },
+  "logging": {
+    "level": "info",
+    "console_enabled": true,
+    "file_enabled": true,
+    "file_path": "logs/vitalsign.log",
+    "max_file_size_mb": 10,
+    "max_files": 5,
+    "pattern": "[%Y-%m-%d %H:%M:%S.%e] [%^%l%$] [%t] %v"
+  },
+  "monitoring": {
+    "health_check_interval_sec": 60,
+    "metrics_enabled": true,
+    "alert_on_error": true
+  }
+}
